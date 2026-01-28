@@ -1,8 +1,15 @@
-import { sumToNA, sumToNB, sumToNC } from "./problem-4";
+import express, { Request, Response, NextFunction } from 'express';
+import mainRouter from './routes/index';
 
-const n = 10;
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-console.log(`Problem 4 with n = ${n}`)
-console.log('sumToNA(n): ', sumToNA(n));
-console.log('sumToNB(n): ', sumToNB(n));
-console.log('sumToNC(n): ', sumToNC(n));
+app.use('/api', mainRouter);
+
+app.use('/', (req, res) => {
+    return res.status(200).send('Say hello!');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+})
