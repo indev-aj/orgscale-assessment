@@ -1,10 +1,23 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "strict": true,
-    "esModuleInterop": true
-  }
+    "compilerOptions": {
+      "target": "ESNext",                    // Target the latest JavaScript version.
+      "module": "NodeNext",                 // Use Node.js-style module resolution.
+      "outDir": "dist",                     // Output directory for compiled JavaScript.
+      "moduleResolution": "NodeNext",      // Node.js module resolution strategy.
+      "esModuleInterop": true,             // Allow default imports from CommonJS modules.
+      "forceConsistentCasingInFileNames": true, // Enforce consistent casing in file names.
+      "strict": true,                      // Enable all strict type-checking options.
+      "skipLibCheck": true,                // Skip type checking of declaration files.
+      "sourceMap": true,                   // Generate source maps for debugging.
+      "baseUrl": ".",                      // Base directory for non-relative module names.
+    },
+    // "include": [
+    //     "dashboard/**/*.ts", 
+    //     "journeyPlanner/**/*.ts", 
+    //     "shared/**/*.ts",
+    //     "router.ts", 
+    //     "index.ts"
+    // ],
+    "include": ["./**/*.ts"],
+    "exclude": ["node_modules", "dist", "prisma"]    
 }

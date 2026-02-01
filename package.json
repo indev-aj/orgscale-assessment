@@ -5,7 +5,9 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsc -w"
+    "dev": "tsc -w",
+    "migrate:create": "npx prisma migrate dev --create-only --name",
+    "migrate": "npx prisma migrate dev --name"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +19,11 @@
     "@types/pg": "^8.16.0",
     "express": "^4.21.2",
     "pg": "^8.13.1",
+    "prisma": "^6.4.1",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "@prisma/client": "^6.4.1"
   }
 }

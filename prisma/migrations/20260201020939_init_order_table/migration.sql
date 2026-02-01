@@ -1,0 +1,10 @@
+-- CreateTable
+CREATE TABLE "Orders" (
+    "id" SERIAL NOT NULL,
+    "itemName" TEXT NOT NULL,
+    "itemPrice" DECIMAL(10,2) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Orders_pkey" PRIMARY KEY ("id")
+);
