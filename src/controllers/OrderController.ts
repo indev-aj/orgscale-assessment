@@ -26,7 +26,8 @@ class OrderController {
     }
 
     static async findAll(req: Request, res: Response): Promise<any> {
-        const { minPriceRaw, maxPriceRaw } = req.query;
+        const minPriceRaw = req.query.minPrice;
+        const maxPriceRaw = req.query.maxPrice;
 
         const minPrice =
             typeof minPriceRaw === "string" && minPriceRaw !== ""
