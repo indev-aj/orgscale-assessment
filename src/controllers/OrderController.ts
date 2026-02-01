@@ -26,9 +26,42 @@ class OrderController {
     }
 
     static async findAll(req: Request, res: Response): Promise<any> {
+        const { minPriceRaw, maxPriceRaw } = req.query;
+
+        const minPrice =
+            typeof minPriceRaw === "string" && minPriceRaw !== ""
+                ? Number(minPriceRaw)
+                : undefined;
+
+        const maxPrice =
+            typeof maxPriceRaw === "string" && maxPriceRaw !== ""
+                ? Number(maxPriceRaw)
+                : undefined;
+
+        if (minPrice !== undefined && !Number.isFinite(minPrice)) {
+            return res.status(400).send("minPrice must be a number");
+        }
+        if (maxPrice !== undefined && !Number.isFinite(maxPrice)) {
+            return res.status(400).send("maxPrice must be a number");
+        }
+        if (minPrice !== undefined && maxPrice !== undefined && minPrice > maxPrice) {
+            return res.status(400).send("minPrice cannot be greater than maxPrice");
+        }
+
         try {
-            const orders = await prisma.orders.findMany();
-            if (!orders) return res.status(404).send('orders not found');
+            const priceFilter: { gte?: number; lte?: number } = {};
+            if (minPrice !== undefined) priceFilter.gte = minPrice;
+            if (maxPrice !== undefined) priceFilter.lte = maxPrice;
+
+            const where: any = {};
+            if (Object.keys(priceFilter).length > 0) {
+                where.itemPrice = priceFilter;
+            }
+
+            const orders = await prisma.orders.findMany({
+                where: Object.keys(where).length ? where : undefined,
+                orderBy: { createdAt: "desc" },
+            });
 
             return res.status(200).send(orders);
         } catch (error: any) {
@@ -36,6 +69,7 @@ class OrderController {
             return res.status(500).json({ message: 'Internal Server Error', error: error instanceof Error ? error.message : String(error) });
         }
     }
+
     static async findOne(req: Request, res: Response): Promise<any> {
         const id = Number(req.params.id);
         if (!Number.isInteger(id)) return res.status(400).send('id must be an integer');
