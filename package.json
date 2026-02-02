@@ -8,7 +8,8 @@
     "dev": "tsc -w",
     "client": "cd client && npm run dev",
     "migrate:create": "npx prisma migrate dev --create-only --name",
-    "migrate": "npx prisma migrate dev --name"
+    "migrate": "npx prisma migrate dev --name",
+    "problem:4": "node dist/src/problem-4.js"
   },
   "keywords": [],
   "author": "",

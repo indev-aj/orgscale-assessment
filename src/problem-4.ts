@@ -71,4 +71,11 @@ const sumToNC = (n: number): number => {
     return n + sumToNC(n - 1);
 }
 
+const n = 10;
+console.log('n = ', n);
+console.log('sumToNA: ', sumToNA(n));
+console.log('sumToNB: ', sumToNB(n));
+console.log('sumToNC: ', sumToNC(n));
+
+
 export { sumToNA, sumToNB, sumToNC };
