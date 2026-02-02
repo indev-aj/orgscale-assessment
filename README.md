@@ -98,3 +98,6 @@ Open the UI at:
 ```
 http://localhost:5173/
 ```
+
+## Problem 6: Architecture
+Solution written in `src/problem-6-README.md`
